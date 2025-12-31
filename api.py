@@ -1,9 +1,9 @@
 from fastapi import FastAPI, HTTPException
 import json, os
 
-app = FastAPI(title="fasion design Colleges API")
+app = FastAPI(title="fashion design Colleges API")
 
-DATA_FILE = "top_fasion_design_college_data.json"
+DATA_FILE = "top_fashion_design_college_data.json"
 
 def load_data():
     if os.path.exists(DATA_FILE):
@@ -15,11 +15,11 @@ def load_data():
 async def root():
     return {"message": "API is running! Go to /fasion_design_colleges to see all colleges."}
 
-@app.get("/medical_design")
+@app.get("/fashion_design")
 async def get_all_colleges():
-    return {"/medical_design": load_data()}
+    return {"/fashion_design": load_data()}
 
-@app.get("/medical_design/{college_id}")
+@app.get("/fashion_design/{college_id}")
 async def get_college_by_id(college_id: int):
     data = load_data()
     idx = 1

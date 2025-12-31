@@ -137,7 +137,7 @@ def scrape():
     finally:
         driver.quit()
 
-    with open("top_fasion_design_college_data.json", "w", encoding="utf-8") as f:
+    with open("top_fashion_design_college_data.json", "w", encoding="utf-8") as f:
         json.dump(all_sections_data, f, indent=2, ensure_ascii=False)
 
     print("✅ Data scraped & saved successfully")
