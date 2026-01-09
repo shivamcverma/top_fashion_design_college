@@ -11,8 +11,8 @@ import platform
 
 design_sections = {
     "top fashion design colleges in india": "https://www.shiksha.com/design/fashion-design/ranking/top-fashion-design-colleges-in-india/94-2-0-0-0",
-    "top fashion design colleges in bangalore": "https://www.shiksha.com/design/fashion-design/ranking/top-fashion-design-colleges-in-bangalore/94-2-0-278-0",
-    "top fashion design colleges in delhi ncr": "https://www.shiksha.com/design/fashion-design/ranking/top-fashion-design-colleges-in-delhi-ncr/94-2-0-10223-0",
+    # "top fashion design colleges in bangalore": "https://www.shiksha.com/design/fashion-design/ranking/top-fashion-design-colleges-in-bangalore/94-2-0-278-0",
+    # "top fashion design colleges in delhi ncr": "https://www.shiksha.com/design/fashion-design/ranking/top-fashion-design-colleges-in-delhi-ncr/94-2-0-10223-0",
 }
 
 
@@ -37,12 +37,13 @@ def create_driver():
 def scrape():
     driver = create_driver()
     all_sections_data = []
+    c_count = 1
 
     try:
         for category_name, category_url in design_sections.items():
             colleges_in_section = []
 
-            for page in range(1, 5):
+            for page in range(1, 3):
                 url = category_url if page == 1 else f"{category_url}?pageNo={page}"
                 driver.get(url)
                 driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
@@ -114,7 +115,8 @@ def scrape():
                         pass
 
                     colleges_in_section.append({
-                        "college_img": college_img,
+                        "id":f"college_{c_count:03d}",
+                        "college_img":college_img,
                         "name": college_name,
                         "nirf": nirf_rank,
                         "details": {
@@ -126,6 +128,7 @@ def scrape():
                             }
                         }
                     })
+                    c_count += 1
 
                 time.sleep(2)
 
